@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podcast-webapp
+  labels:
+    app: podcast-webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: podcast-webapp
+  template:
+    metadata:
+      labels:
+        app: podcast-webapp
+    spec:
+      containers:
+      - name: podcast-webapp
+        image: podcast-webapp:1.0
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secrets
+              key: database-url
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-secrets
+              key: api-key
+        - name: ELEVEN_LKABS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: eleven-lkabs-secrets
+              key: api-key
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      imagePullSecrets:
+      - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podcast-webapp-service
+spec:
+  selector:
+    app: podcast-webapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
