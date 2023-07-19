@@ -1,33 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Podcast Host Webapp</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>Poddy</title>
 </head>
 <body>
-    <header>
-        <h1>Host Your Own Podcast</h1>
-    </header>
-    <main>
-        <section id="guest-list">
-            <h2>Guest List</h2>
-            <ul id="guests"></ul>
-        </section>
-        <section id="podcast-player">
-            <h2>Podcast Player</h2>
-            <audio controls></audio>
-        </section>
-        <section id="voice-replicator">
-            <h2>Voice Replicator</h2>
-            <button id="start-call">Start Call</button>
-        </section>
-    </main>
-    <footer>
-        <p>Powered by Eleven Lkabs</p>
-    </footer>
-    <script src="main.js"></script>
-    <script src="voice_replicator.js"></script>
+  <h1>Welcome to Poddy</h1>
+  <h1 id='welcome-message'></h1>
+  <form id='sign-up-form'>
+    <input type='email' id='email' placeholder='Email'>
+    <input type='password' id='password' placeholder='Password'>
+    <button type='submit'>Sign Up</button>
+  </form>
+  <form id='sign-in-form'>
+    <input type='email' id='sign-in-email' placeholder='Email'>
+    <input type='password' id='sign-in-password' placeholder='Password'>
+    <button type='submit'>Sign In</button>
+  </form>
+  <button id='sign-out' style='display: none;'>Sign Out</button>
+  <p id='user-email'></p>
+  <script src='main.js'></script>
 </body>
 </html>
