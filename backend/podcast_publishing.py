@@ -1,32 +1,28 @@
 from flask import Blueprint, request, jsonify
+from flask_uploads import UploadSet, configure_uploads, IMAGES
 from models import Podcast, db
 from werkzeug.utils import secure_filename
 import os
 
 podcast_publishing = Blueprint('podcast_publishing', __name__)
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+photos = UploadSet('photos', IMAGES)
 
+app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
+configure_uploads(app, photos)
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-@podcast_publishing.route('/publishPodcast', methods=['POST'])
+@app.route('/publishPodcast', methods=['POST'])
 def publish_podcast():
     if 'file' not in request.files:
         return jsonify({"message": "No file part"}), 400
     file = request.files['file']
     if file.filename == '':
         return jsonify({"message": "No selected file"}), 400
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(UPLOAD_FOLDER, filename))
+    if file and photos.file_allowed(file, file.filename):
+        filename = photos.save(file)
         podcast = Podcast.query.filter_by(id=request.form['podcastId']).first()
         if podcast:
-            podcast.artwork = os.path.join(UPLOAD_FOLDER, filename)
+            podcast.artwork = photos.url(filename)
             podcast.title = request.form['title']
             podcast.description = request.form['description']
             db.session.commit()

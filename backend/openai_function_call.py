@@ -9,6 +9,7 @@ class User(OpenAISchema):
     name: str
     age: int
 
+
 class MultiTask(OpenAISchema):
     def __init__(self, schema):
         self.schema = schema
@@ -18,6 +19,7 @@ class MultiTask(OpenAISchema):
     def from_streaming_response(response):
         for message in response['choices'][0]['message']['role']:
             yield User(**message)
+
 
 def stream_extract(input: str) -> List[User]:
     openai = APIResource(api_key="your-api-key")
