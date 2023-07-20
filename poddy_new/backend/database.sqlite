@@ -1,0 +1,43 @@
+import sqlite3
+
+def create_database():
+    conn = sqlite3.connect('database.sqlite')
+
+    c = conn.cursor()
+
+    # Create table for User
+    c.execute('''
+        CREATE TABLE User (
+            id INTEGER PRIMARY KEY,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE
+        )
+    ''')
+
+    # Create table for Podcast
+    c.execute('''
+        CREATE TABLE Podcast (
+            id INTEGER PRIMARY KEY,
+            title TEXT NOT NULL,
+            description TEXT,
+            user_id INTEGER,
+            FOREIGN KEY(user_id) REFERENCES User(id)
+        )
+    ''')
+
+    # Create table for Guest
+    c.execute('''
+        CREATE TABLE Guest (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            podcast_id INTEGER,
+            FOREIGN KEY(podcast_id) REFERENCES Podcast(id)
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+if __name__ == "__main__":
+    create_database()
