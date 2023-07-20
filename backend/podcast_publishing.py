@@ -7,6 +7,8 @@ import os
 podcast_publishing = Blueprint('podcast_publishing', __name__)
 
 photos = UploadSet('photos', IMAGES)
+UPLOAD_FOLDER = './uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
 configure_uploads(app, photos)

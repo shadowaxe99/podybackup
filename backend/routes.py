@@ -1,13 +1,11 @@
-from flask import Flask, request, jsonify
-from .models import User, Podcast, Guest
-from .voice_replication import replicate_voice
+from flask import request, jsonify
+from models import User, Podcast, Guest
+from voice_replication import replicate_voice
 from .podcast_editing import edit_podcast
 from .podcast_publishing import publish_podcast
 from .user_profile import get_user_profile, update_user_profile
 from .podcast_sharing import share_podcast
 from .podcast_discovery import search_podcast
-
-app = Flask(__name__)
 
 @app.route('/login', methods=['POST'])
 def login():
