@@ -1,0 +1,3 @@
+[submodule "elevenlabs-python"]
+	path = elevenlabs-python
+	url = https://github.com/elevenlabs/elevenlabs-python.git
