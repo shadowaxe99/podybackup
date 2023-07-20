@@ -1,10 +1,6 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import request, jsonify
 from models import User
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite'
-db = SQLAlchemy(app)
+from database_config import db
 
 @app.route('/userProfile', methods=['GET'])
 def get_user_profile():

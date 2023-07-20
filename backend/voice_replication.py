@@ -1,8 +1,7 @@
 import requests
-from flask import Flask, request, jsonify
+from flask import request, jsonify
 from eleven_labs_api import ElevenLabsAPI
 
-app = Flask(__name__)
 eleven_labs_api = ElevenLabsAPI()
 
 @app.route('/replicate_voice', methods=['POST'])
