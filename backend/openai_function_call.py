@@ -1,6 +1,5 @@
-```python
 from typing import List
-from openai import OpenAI, ChatCompletion
+from openai.api_resources.abstract.api_resource import APIResource
 from pydantic import BaseModel
 
 class OpenAISchema(BaseModel):
@@ -21,7 +20,7 @@ class MultiTask(OpenAISchema):
             yield User(**message)
 
 def stream_extract(input: str) -> List[User]:
-    openai = OpenAI(api_key="your-api-key")
+    openai = APIResource(api_key="your-api-key")
     MultiUser = MultiTask(User)
     completion = openai.ChatCompletion.create(
         model="gpt-4-0613",
@@ -50,4 +49,3 @@ def stream_extract(input: str) -> List[User]:
         assert isinstance(user, User)
         users.append(user)
     return users
-```

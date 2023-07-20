@@ -1,3 +1,4 @@
+from typing import List
 from flask_sqlalchemy import SQLAlchemy
 from openai_function_call import User
 

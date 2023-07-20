@@ -26,3 +26,12 @@ class VoiceReplicator:
     def save_audio(self, audio: str, filename: str) -> None:
         with open(filename, 'wb') as audio_file:
             audio_file.write(audio.encode())
+
+def replicate_voice(name):
+    vr = VoiceReplicator('your-api-key')
+    success, audio = vr.replicate_voice(f'Hello, my name is {name}', 'en-US')
+    if success:
+        vr.save_audio(audio, f'{name}.wav')
+        return f'{name}.wav'
+    else:
+        return None
