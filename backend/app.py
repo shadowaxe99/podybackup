@@ -26,6 +26,7 @@ def signup():
 
 @app.route('/editPodcast', methods=['POST'])
 def edit_podcast():
+    print('Editing podcast...')
     return podcast_editing.edit_podcast(request)
 
 @app.route('/publishPodcast', methods=['POST'])

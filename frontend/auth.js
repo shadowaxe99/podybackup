@@ -1,6 +1,6 @@
 // Import Firebase
-import firebase from 'firebase/app';
-import 'firebase/auth';
+const firebase = require('firebase/app');
+require('firebase/auth');
 
 // Firebase configuration
 const firebaseConfig = {
@@ -44,4 +44,4 @@ function loginUser(email, password) {
 }
 
 // Export functions
-export { signupUser, loginUser };
+module.exports = { signupUser, loginUser };

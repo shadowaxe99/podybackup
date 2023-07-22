@@ -15,6 +15,7 @@ WORKDIR /podcast_app
 ADD . /podcast_app/
 
 # Install any needed packages specified in requirements.txt
+RUN apt-get update && apt-get install -y gcc python3-dev portaudio19-dev libgomp1 libomp-dev libomp-7-dev
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
@@ -22,4 +23,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # run the command
-CMD ["python", "./backend/app.py"]
+CMD ["python", "./backend/main.py"]

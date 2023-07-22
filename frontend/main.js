@@ -1,6 +1,6 @@
 // Importing necessary modules
-import * as auth from './auth.js';
-import * as webrtc from './webrtc.js';
+const auth = require('./auth.js');
+const webrtc = require('./webrtc.js');
 
 // DOM Elements
 const loginButton = document.getElementById('loginButton');
@@ -27,7 +27,20 @@ searchPodcastInput.addEventListener('keyup', searchPodcast);
 
 // Functions
 function loginUser() {
-  auth.login().then(token => {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (!validator.isAlphanumeric(username)) {
+    alert('Username is not valid. Please enter only alphanumeric characters.');
+    return;
+  }
+
+  if (!validator.isLength(password, { min: 6 })) {
+    alert('Password is not valid. It should be at least 6 characters long.');
+    return;
+  }
+
+  auth.login(username, password).then(token => {
     authToken = token;
     fetchUserProfile();
     fetchPodcasts();
@@ -48,6 +61,11 @@ function editPodcast() {
 }
 
 function publishPodcast() {
+  if (!authToken) {
+    alert('You must be logged in to publish a podcast.');
+    return;
+  }
+
   if (currentPodcast) {
     publishCurrentPodcast(currentPodcast);
   }

@@ -1,47 +1,108 @@
 # Poddy
 
-Poddy is a web application that allows you to host your own podcast with anyone notable in the real world. It uses a voice replicator to simulate the voice of the guest, providing a fluid and realistic conversation experience.
+Poddy is a podcast creation and streaming platform.
 
-## Features
+## Installation and Setup
 
-- Real-time communication
-- Voice replication
-- Google Sign-In
+1. Clone the repository:
 
-## Code Structure and Architecture
+```
+git clone https://github.com/username/poddy.git
+```
 
-The application is divided into two main parts: the frontend and the backend.
+2. Navigate to the project directory:
 
-### Frontend
+```
+cd poddy
+```
 
-The frontend is built with HTML, CSS, and JavaScript. It uses Firebase for user authentication and WebRTC for real-time communication.
+3. Install the dependencies:
 
-### Backend
+For the backend:
 
-The backend is built with Flask, a Python web framework. It uses SQLite for development and PostgreSQL for production. The backend also interacts with the OpenAI API to extract entities from the conversation and the Eleven Labs API to replicate voices.
+```
+cd backend
+pip install -r requirements.txt
+```
 
-## Dependencies
+For the frontend:
 
-- Flask
-- SQLite
-- PostgreSQL
-- OpenAI
-- Eleven Labs
-- Firebase
-- WebRTC
+```
+cd frontend
+npm install
+```
+
+4. Configure the environment:
+
+Create a `.env` file in the root directory and add the following environment variables:
+
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=password
+DB_NAME=poddy
+```
+
+Replace `localhost`, `root`, `password`, and `poddy` with your actual database host, user, password, and name respectively.
+
+5. Run the application:
+
+For the backend:
+
+```
+flask run
+```
+
+For the frontend:
+
+```
+npm start
+```
+
+You should now be able to access the application at `http://localhost:3000`.
+
+## Directory Structure
+
+- `backend/`: Contains the backend code.
+- `frontend/`: Contains the frontend code.
+- `database/`: Contains the database scripts.
+- `tests/`: Contains the test scripts.
+
+## Configuration
+
+The application uses the following environment variables:
+
+- `DB_HOST`: The database host.
+- `DB_USER`: The database user.
+- `DB_PASS`: The database password.
+- `DB_NAME`: The database name.
+
+These can be set in a `.env` file in the root directory.
+
+## Running the Application Locally
+
+You can run the application locally for development by running `flask run` for the backend and `npm start` for the frontend.
+
+## Testing
+
+You can run the tests by running `pytest` for the backend and `npm test` for the frontend.
+
+## CI/CD Process
+
+The application uses GitHub Actions for the CI/CD process. The workflows are defined in the `.github/workflows` directory.
 
 ## Deployment
 
-The application is containerized using Docker and can be deployed on any platform that supports Docker. For orchestration, it includes a Kubernetes configuration.
+The application is deployed to a Kubernetes cluster. The Kubernetes configuration files are located in the `kubernetes/` directory.
 
-## Getting Started
+## Contribution Guidelines
 
-To run the application locally, you need to have Python and Docker installed on your machine. Then, you can clone the repository and run the application using the following commands:
+Please see the `CONTRIBUTING.md` file for the contribution guidelines.
 
-```
-git clone https://github.com/shadowaxe99/poddy.git
-cd poddy
-python3 backend/app.py
-```
+## API Documentation
 
-Then, open your web browser and navigate to `http://localhost:5000`.
+The API documentation is available at `http://localhost:5000/api/docs`.
+
+## Troubleshooting
+
+If you encounter any issues, please check the `TROUBLESHOOTING.md` file for common solutions.
